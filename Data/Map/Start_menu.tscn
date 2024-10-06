@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://c82dunj6pyltw"]
+
+[ext_resource type="Script" path="res://Data/Map/Start_menu_script.gd" id="1_p3did"]
+[ext_resource type="PackedScene" uid="uid://fbty7qoypx8w" path="res://Data/Player/Textyres/Player_rig.tscn" id="2_g40o2"]
+
+[node name="StartMenu" type="Node2D"]
+script = ExtResource("1_p3did")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 143.0
+offset_top = -106.0
+offset_right = 469.0
+offset_bottom = -15.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Start game"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 143.0
+offset_top = 2.5
+offset_right = 469.0
+offset_bottom = 93.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 60
+text = "Exit"
+
+[node name="PlayerRig" parent="CanvasLayer" instance=ExtResource("2_g40o2")]
+position = Vector2(781, 419)
+scale = Vector2(9.48, 9.48)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 143.0
+offset_top = 447.0
+offset_right = 1185.0
+offset_bottom = 518.0
+theme_override_font_sizes/font_size = 16
+text = "After several hours of intense struggle, you find yourself at the very lair of the virus.
+As the last of the white blood cells, you must defeat it and save the body in which you live."
+
+[node name="Label4" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.313726)
+offset_left = 889.0
+offset_top = 585.0
+offset_right = 1931.0
+offset_bottom = 666.0
+theme_override_font_sizes/font_size = 16
+text = "Made by: //[imai] 
+it was made by Imai in 48 hours"
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+offset_left = 143.0
+offset_right = 1185.0
+offset_bottom = 175.0
+theme_override_font_sizes/font_size = 128
+text = "Leukocytium
+"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 143.0
+offset_top = 526.0
+offset_right = 1313.0
+offset_bottom = 597.0
+theme_override_font_sizes/font_size = 16
+text = "После нескольких часов напряжённой борьбы вы оказываетесь у самого логова вируса.
+Как последний из лейкоцитов, вы обязаны победить его и спасти организм, в котором живёте."
+
+[connection signal="button_down" from="CanvasLayer/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Button2" to="." method="_on_button_2_button_down"]

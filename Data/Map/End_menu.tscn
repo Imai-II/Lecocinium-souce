@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhtvrl4a0p7xw"]
+
+[ext_resource type="Script" path="res://Data/Map/End_menu.gd" id="1_vujaf"]
+
+[node name="EndMenu" type="Node2D"]
+script = ExtResource("1_vujaf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -277.0
+offset_right = 316.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Thank you for playing
+It was a great experience for me.
+The game was created in a hurry in 48 hours,
+So there is very little interesting in it.
+Аnd also I didn't sleep for 1 night"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = -52.0
+offset_right = 532.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Made especially for Ludum dare 56"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 290.0
+offset_top = 399.0
+offset_right = 871.0
+offset_bottom = 495.0
+theme_override_font_sizes/font_size = 32
+text = "back to the menu"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 290.0
+offset_top = 521.0
+offset_right = 871.0
+offset_bottom = 617.0
+theme_override_font_sizes/font_size = 32
+text = "exiting the game
+"
+
+[connection signal="button_down" from="CanvasLayer/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Button2" to="." method="_on_button_2_button_down"]

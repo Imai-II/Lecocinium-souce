@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp2onlc3u4abt"]
+
+[ext_resource type="Script" path="res://Data/enemy/Boss/Attack/Boom_position_plauyer.gd" id="1_85gnr"]
+[ext_resource type="Texture2D" uid="uid://eif1qkvs81wa" path="res://Data/enemy/Boss/Ayes_P2.png" id="2_7plty"]
+[ext_resource type="Texture2D" uid="uid://2ktcup701tpj" path="res://Data/enemy/Boss/Ayes_boos1.png" id="3_yvry4"]
+
+[sub_resource type="Animation" id="Animation_eb4kv"]
+resource_name = "Boom_attack"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AyesP2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2, 3),
+"transitions": PackedFloat32Array(-2, 1, 1, 1, -2),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(3, 3), Vector2(3, 3), Vector2(3, 3), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AyesP2/Polygon2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AyesP2/Polygon2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.6, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"damage_self"
+}, {
+"args": [],
+"method": &"delite_self"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4abm0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AyesP2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AyesP2/Polygon2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AyesP2/Polygon2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhdsa"]
+_data = {
+"Boom_attack": SubResource("Animation_eb4kv"),
+"RESET": SubResource("Animation_4abm0")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bi38e"]
+radius = 93.0
+
+[node name="BoomPositionPlauyer" type="Node2D"]
+script = ExtResource("1_85gnr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qhdsa")
+}
+autoplay = "Boom_attack"
+
+[node name="AyesP2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_7plty")
+
+[node name="Polygon2D" type="Polygon2D" parent="AyesP2"]
+scale = Vector2(1e-05, 1e-05)
+offset = Vector2(-57, -32)
+texture = ExtResource("3_yvry4")
+polygon = PackedVector2Array(48, 0, 64, 0, 64, 32, 48, 32)
+uv = PackedVector2Array(48, 0, 64, 0, 64, 32, 48, 32)
+
+[node name="Polygon2D" type="Polygon2D" parent="AyesP2/Polygon2D"]
+rotation = -6.28319
+offset = Vector2(-57, -32)
+texture = ExtResource("3_yvry4")
+polygon = PackedVector2Array(48, 0, 64, 0, 64, 32, 48, 32)
+uv = PackedVector2Array(48, 0, 64, 0, 64, 32, 48, 32)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bi38e")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

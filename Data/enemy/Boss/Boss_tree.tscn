@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://q0rl4tqujr2u"]
+
+[ext_resource type="Script" path="res://Data/enemy/Boss/Boss_script.gd" id="1_dxocp"]
+[ext_resource type="Texture2D" uid="uid://2ktcup701tpj" path="res://Data/enemy/Boss/Ayes_boos1.png" id="1_y66gj"]
+[ext_resource type="Script" path="res://Data/enemy/can_attack.gd" id="2_2bsv0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fsveq"]
+radius = 5.0
+height = 40.0
+
+[node name="BossTree" type="Node2D"]
+light_mask = 2
+scale = Vector2(2, 2)
+script = ExtResource("1_dxocp")
+
+[node name="Ayes" type="Polygon2D" parent="."]
+clip_children = 2
+offset = Vector2(-16, -24)
+texture = ExtResource("1_y66gj")
+polygon = PackedVector2Array(0, 24, 8, 0, 24, 0, 32, 24, 24, 48, 8, 48)
+uv = PackedVector2Array(0, 24, 8, 0, 24, 0, 32, 24, 24, 48, 8, 48)
+
+[node name="Polygon2D" type="Polygon2D" parent="Ayes"]
+clip_children = 1
+offset = Vector2(-40, -8)
+texture = ExtResource("1_y66gj")
+polygon = PackedVector2Array(32, 8, 40, 0, 48, 8, 40, 16)
+uv = PackedVector2Array(32, 8, 40, 0, 48, 8, 40, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("2_2bsv0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CapsuleShape2D_fsveq")

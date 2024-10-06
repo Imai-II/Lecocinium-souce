@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtpc547sjgma1"]
+
+[ext_resource type="Script" path="res://Data/Player/Player_script.gd" id="1_0a7rp"]
+[ext_resource type="PackedScene" uid="uid://fbty7qoypx8w" path="res://Data/Player/Textyres/Player_rig.tscn" id="2_yk537"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i4vvm"]
+radius = 9.0
+height = 48.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jepec"]
+size = Vector2(35, 47)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pkfyl"]
+size = Vector2(22, 1)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_0a7rp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -24)
+shape = SubResource("CapsuleShape2D_i4vvm")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -25)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -30)
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_vertical_enabled = true
+drag_bottom_margin = 0.1
+editor_draw_drag_margin = true
+
+[node name="FlipDirection" type="Node2D" parent="."]
+
+[node name="PlayerRig" parent="FlipDirection" instance=ExtResource("2_yk537")]
+
+[node name="Area2D" type="Area2D" parent="FlipDirection"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipDirection/Area2D"]
+position = Vector2(25, -24)
+shape = SubResource("RectangleShape2D_jepec")
+
+[node name="Sprite2D" type="Sprite2D" parent="FlipDirection/Area2D"]
+position = Vector2(25, -24)
+scale = Vector2(1.54545, 46.5)
+texture = SubResource("PlaceholderTexture2D_pkfyl")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Arm_can" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Arm_can" to="." method="_on_arm_can_timeout"]

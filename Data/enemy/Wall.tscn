@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf4ja0ofwt2ei"]
+
+[ext_resource type="Script" path="res://Data/enemy/can_attack.gd" id="1_52tua"]
+[ext_resource type="TileSet" uid="uid://bq18aoms2ahkl" path="res://Data/Textyres_folder/Tile/Meat_tile_set.tres" id="1_eavl2"]
+[ext_resource type="Script" path="res://Data/enemy/Break_wall.gd" id="3_e4rnf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8vfl"]
+size = Vector2(32, 64)
+
+[node name="Wall" type="StaticBody2D"]
+collision_layer = 2
+script = ExtResource("1_52tua")
+
+[node name="TileMap" type="TileMap" parent="."]
+modulate = Color(0, 8, 0, 1)
+tile_set = ExtResource("1_eavl2")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131072, 196608, 5, -65536, 327680, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, -32)
+shape = SubResource("RectangleShape2D_l8vfl")
+
+[node name="Script_node" type="Node" parent="."]
+script = ExtResource("3_e4rnf")
+
+[connection signal="Take_damage" from="." to="Script_node" method="_on_wall_take_damage"]
